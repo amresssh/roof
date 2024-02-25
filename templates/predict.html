@@ -2,28 +2,29 @@
 <html>
 <head>
     <title>Roof Shade top floor cooling and heating Percentage reduction</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Add viewport meta tag -->
     <style>
         body {
-            font-family: Arial, sans-serif; /* Use sans-serif font */
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f2f2f2; /* Set background color */
+            background-color: #f2f2f2;
         }
         h1 {
-            color: #333333; /* Set heading color */
+            color: #333333;
         }
         form {
-            background-color: #ffffff; /* Set form background color */
+            background-color: #ffffff;
             padding: 20px;
-            border-radius: 10px; /* Add rounded corners to form */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow for depth */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         label {
             font-weight: bold;
             color: #555555;
         }
         select, input[type="number"] {
-            width: 100%;
+            width: calc(100% - 22px); /* Adjust width to accommodate padding and border */
             padding: 10px;
             margin-bottom: 10px;
             border: 1px solid #dddddd;
@@ -32,7 +33,7 @@
             font-size: 16px;
         }
         input[type="submit"] {
-            background-color: #4CAF50; /* Green submit button */
+            background-color: #4CAF50;
             color: white;
             padding: 14px 20px;
             margin: 8px 0;
@@ -43,12 +44,22 @@
             font-size: 16px;
         }
         input[type="submit"]:hover {
-            background-color: #45a049; /* Darker green hover color */
+            background-color: #45a049;
         }
         p {
             margin-top: 20px;
             font-size: 18px;
             color: #333333;
+        }
+
+        /* Responsive CSS */
+        @media only screen and (max-width: 600px) {
+            form {
+                padding: 10px; /* Adjust padding for smaller screens */
+            }
+            select, input[type="number"], input[type="submit"] {
+                width: 100%; /* Set width to 100% for smaller screens */
+            }
         }
     </style>
 </head>
@@ -57,7 +68,7 @@
     {% if result %}
     <p>The predicted Top Floor cooling and Heating Load savings: {{result}} %</p>
     {% endif %}
-    {% if result %}
+    {% if result_uval %}
     <p>The predicted Equivalent U-Value for the given Roof Shade: {{result_uval}} W/m2K</p>
     {% endif %}
 </body>
