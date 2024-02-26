@@ -9,10 +9,11 @@ def create_my_app():
 
     # Load preprocessed pipeline
     preprocessing_pipe = pickle.load(open('pipepreprocessing.pkl', 'rb'))
-    preprocessing_pipe_uval=pickle.load(open('pipepreprocessingu_val.pkl', 'rb'))
+    # preprocessing_pipe_uval=pickle.load(open('pipepreprocessingu_val.pkl', 'rb'))
+    pipe_uval=pickle.load(open('pipe_u_val.pkl', 'rb'))
     # Load Keras model
     keras_model = load_model('my_keras_model.keras')
-    keras_model_uval = load_model('my_uval_model.keras')
+    # keras_model_uval = load_model('my_uval_model.keras')
 
 
     @app.route("/")
@@ -67,11 +68,13 @@ def create_my_app():
         # Make predictions
         result = keras_model.predict(preprocessed_input)
         input_data_for_uval=np.array([latitude, longitude,result[0][0]]).reshape(1,-1)
-        preprocessed_input_uval = preprocessing_pipe_uval.transform(input_data_for_uval)
-        preprocessed_input_uval = preprocessed_input_uval.astype(np.float64)
-        result_uval = keras_model_uval.predict(preprocessed_input_uval)
+        # preprocessed_input_uval = preprocessing_pipe_uval.transform(input_data_for_uval)
+        # preprocessed_input_uval = preprocessed_input_uval.astype(np.float64)
+        # result_uval = keras_model_uval.predict(preprocessed_input_uval)
+        result_uval = pipe_uval.predict(input_data_for_uval)
+
   
-        return render_template('predict.html', result=result[0][0], result_uval=result_uval[0][0])
+        return render_template('predict.html', result=result[0][0], result_uval=result_uval[0])
     return app
 if __name__ == '__main__':
     from waitress import serve
